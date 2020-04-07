@@ -17,15 +17,13 @@
 %}
 {%- set vscode = salt['grains.filter_by']( {'defaults': defaults}, default='defaults', merge=_config) %}
 
-https://go.microsoft.com/fwlink/?LinkID=620884
-
 {%- if vscode.pkg.use_upstream_archive %}
        {%- set url = '%s'|format(vscode.pkg.archive.uri) %}
        {%- if grains.os_family == 'MacOS' %}
            {%- do vscode.pkg.archive.update({ 'name': '/Applications', 'source': uri }) %}
        {%- else %}
-           {%- set dir = '%s-%s-%s'|format(vscode.pkg.name, vscode.version, vscode.pkg.archive.tag) %}
-           {%- do vscode.config.update({'path': vscode.dir.archive + '/' + dir }) %},
+           {%- set dir = 'VSCode-linux-x64' %}
+           {%- do vscode.config.update({'path': 'vscode.dir.archive + '/' + dir }) %},
            {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive + '/' + dir, 'source': url }) %}
        {%- endif %}
 {%- endif %}

@@ -33,3 +33,8 @@ vscode-package-archive-install-extract:
     - enforce_toplevel: false
     - options: '--strip-components=1'
        {%- endif %}
+  cmd.run:
+    - names:
+      - mv {{ vscode.pkg.archive.name }}/VSCode-linux-x64/* {{ vscode.pkg.archive.name }}/
+      - rm -fr {{ vscode.pkg.archive.name }}/VSCode-linux-x64 
+
