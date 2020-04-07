@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+vscode:
+  version: 1.43.2
+  pkg:
+    use_upstream_archive: true   # linux tarball
+    use_upstream_package: false  # snap/brew
+    skip_hash_check: false       # true needed if permalink cannot be determined
+    archive:
+          {%- if grains.os_family == 'MacOS' %}
+      source_hash: d6adeca1476e95f2742ac3f2f7f3993e935ecfd2933a00be874d673ced0514b7
+          {%- elif grains.os_family == 'Windows' %}
+      source_hash: 2ad9da475f986abebe2189b9ddea1753d0fdf292ecc6f5b9b6c408312b09348e
+          {%- else %}
+      source_hash: 8f38474e258c1bbd469b5311051c50466a080b9e970b506e0e0bad387d524fed
+          {%- endif %}

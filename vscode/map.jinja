@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- import_yaml tplroot ~ "/defaults.yaml" as default_settings %}
+{%- import_yaml tplroot ~ "/osfamilymap.yaml" as osfamilymap %}
+
+{%- set _config = salt['config.get'](tplroot, default={}) %}
+{%- set defaults = salt['grains.filter_by'](
+      default_settings,
+      default=tplroot,
+      merge=salt['grains.filter_by']( osfamilymap, grain='os_family',
+        merge=salt['grains.filter_by']( _config, default='lookup'
+        )
+      )
+    )
+%}
+{%- set vscode = salt['grains.filter_by']( {'defaults': defaults}, default='defaults', merge=_config) %}
+
+https://go.microsoft.com/fwlink/?LinkID=620884
+
+{%- if vscode.pkg.use_upstream_archive %}
+       {%- set url = '%s'|format(vscode.pkg.archive.uri) %}
+       {%- if grains.os_family == 'MacOS' %}
+           {%- do vscode.pkg.archive.update({ 'name': '/Applications', 'source': uri }) %}
+       {%- else %}
+           {%- set dir = '%s-%s-%s'|format(vscode.pkg.name, vscode.version, vscode.pkg.archive.tag) %}
+           {%- do vscode.config.update({'path': vscode.dir.archive + '/' + dir }) %},
+           {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive + '/' + dir, 'source': url }) %}
+       {%- endif %}
+{%- endif %}
