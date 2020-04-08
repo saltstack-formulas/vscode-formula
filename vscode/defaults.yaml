@@ -17,11 +17,12 @@ vscode:
     use_upstream_archive: true   # tarball
     use_upstream_package: false  # snap/brew
     format: tar
+    deps:
+      - curl
     package:
       name: code  # snap
+    uri: https://go.microsoft.com/fwlink/?LinkID=620884
     archive:
-      uri: https://go.microsoft.com/fwlink/?LinkID=620882
-      tag: x64
       source: 'set by map.jinja'
       source_hash: 8f38474e258c1bbd469b5311051c50466a080b9e970b506e0e0bad387d524fed
       skip_verify: false           # true needed if permalink cannot be determined
@@ -32,3 +33,6 @@ vscode:
     until: true
     interval: 10
     splay: 10
+  kernel: {{ grains.kernel|lower }}
+  linux:
+    altpriority: 0

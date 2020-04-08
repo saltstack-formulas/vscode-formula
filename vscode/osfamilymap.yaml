@@ -18,6 +18,7 @@
 Windows:
   pkg:
     format: zip
+    uri: https://go.microsoft.com/fwlink/?LinkID=850641
     archive:
       source_hash: 2ad9da475f986abebe2189b9ddea1753d0fdf292ecc6f5b9b6c408312b09348e
 
@@ -25,10 +26,14 @@ MacOS:
   rootuser: {{ macos_rootuser | d('') }}
   rootgroup: {{ macos_rootgroup | d('') }}
   environ_file: /etc/defaults/vscode.sh
+  config:
+    path: ''
   pkg:
     package:
       name: visual-studio-code
+    deps:
+      - unzip
     format: zip
+    uri: https://go.microsoft.com/fwlink/?LinkID=620882
     archive:
       source_hash: d6adeca1476e95f2742ac3f2f7f3993e935ecfd2933a00be874d673ced0514b7
-      tag: macos

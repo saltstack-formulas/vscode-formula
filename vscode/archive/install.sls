@@ -7,15 +7,14 @@
 
 vscode-package-archive-install-extract:
   pkg.installed:
-    - names:
-      - curl
-      - tar
-      - unzip
+    - names: {{ vscode.pkg.deps }}
   file.directory:
     - name: {{ vscode.pkg.archive.name }}
+                 {%- if vscode.pkg.archive.name != '/Applications' %}
     - user: {{ vscode.rootuser }}
     - group: {{ vscode.rootgroup }}
     - mode: 755
+                 {%- endif %}
     - makedirs: True
     - require_in:
       - archive: vscode-package-archive-install-extract
@@ -25,11 +24,20 @@ vscode-package-archive-install-extract:
     - retry: {{ vscode.retry_option }}
     - user: {{ vscode.rootuser }}
     - group: {{ vscode.rootgroup }}
-       {%- if grains.kernel|lower == 'linux' %}
-    - enforce_toplevel: false
-    - options: '--strip-components=1'
-       {%- elif grains.os == 'MacOS' %}endif %}
   cmd.run:
+    - onlyif: {{ grains.kernel|lower == 'linux' }}
     - name: mv {{ vscode.dir.archive }}/VSCode-linux-x64 {{ vscode.config.path }}
     - require:
       - archive: vscode-package-archive-install-extract
+
+    {%- if vscode.kernel|lower == 'linux' and vscode.linux.altpriority|int == 0 %}
+
+vscode-archive-install-file-symlink-vscode:
+  file.symlink:
+    - onlyif: {{ vscode.kernel|lower == 'linux' }}
+    - name: {{ vscode.dir.archive }}/bin/code
+    - target: {{ vscode.config.path }}/bin/code
+    - force: True
+    - require:
+      - archive: vscode-package-archive-install-extract
+    {%- endif %}

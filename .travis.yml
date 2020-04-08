@@ -96,7 +96,7 @@ jobs:
     # - env: INSTANCE=default-opensuse-leap-151-2018-3-py2
     # - env: INSTANCE=default-amazonlinux-1-2018-3-py2
     # env: INSTANCE=default-arch-base-latest-2018-3-py2
-    - env: INSTANCE=default-arch-base-latest-master-py2
+    # env: INSTANCE=default-arch-base-latest-master-py2
 
     ## Define the release stage that runs `semantic-release`
     - stage: 'release'

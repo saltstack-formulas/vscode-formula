@@ -14,7 +14,7 @@ vscode-formula
    :scale: 100%
    :target: https://github.com/semantic-release/semantic-release
 
-Formula to install VSCode (and Newman) on GNU/Linux and MacOS.
+Formula to install Visual Studio Code on GNU/Linux and MacOS.
 
 .. contents:: **Table of Contents**
    :depth: 1
@@ -53,35 +53,25 @@ Available states
 
 This installs VSCode and Newman packages
 
-``vscode.config``
+``vscode.package``
 ^^^^^^^^^^^^^^^^^^
 
-This state will install VSCode environment file.
+This state will install VSCode package on MacOS (brew) and GNU/Linux (snap).
 
 ``vscode.archive``
 ^^^^^^^^^^^^^^^^^^
 
-This state will install VSCode from archive.
-
-``vscode.newman``
-^^^^^^^^^^^^^^^^^^
-
-This state will install Newman using homebrew or npm.
+This state will install VSCode on GNU/Linux from archive.
 
 ``vscode.archive.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove VSCode package archive.
+This state will remove VSCode archive.
 
-``vscode.newman.clean``
+``vscode.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove Newman with npm or homebrew.
-
-``vscode.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the VSCode environment file.
+This state will remove VSCode package from MacOS and GNU/Linux.
 
 ``vscode.clean``
 ^^^^^^^^^^^^^^^^^
@@ -94,7 +84,7 @@ this state will undo everything performed in the ``vscode`` meta-state in revers
 Testing
 -------
 
-Linux testing is done with ``kitchen-salt``.
+GNU/Linux testing is done with ``kitchen-salt``.
 
 Requirements
 ^^^^^^^^^^^^

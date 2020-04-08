@@ -13,6 +13,7 @@ ignore: |
   test/**/states/**/*.sls
   .kitchen/
   vscode/osfamilymap.yaml
+  vscode/defaults.yaml
   pillar.example
 
 yaml-files:
