@@ -19,10 +19,6 @@ vscode-package-archive-install-extract:
     - makedirs: True
     - require_in:
       - archive: vscode-package-archive-install-extract
-    - recurse:
-        - user
-        - group
-        - mode
   archive.extracted:
     {{- format_kwargs(vscode.pkg.archive) }}
     - archive_format: {{ vscode.pkg.format }}
@@ -32,9 +28,8 @@ vscode-package-archive-install-extract:
        {%- if grains.kernel|lower == 'linux' %}
     - enforce_toplevel: false
     - options: '--strip-components=1'
-       {%- endif %}
+       {%- elif grains.os == 'MacOS' %}endif %}
   cmd.run:
-    - names:
-      - mv {{ vscode.pkg.archive.name }}/VSCode-linux-x64/* {{ vscode.pkg.archive.name }}/
-      - rm -fr {{ vscode.pkg.archive.name }}/VSCode-linux-x64 
-
+    - name: mv {{ vscode.dir.archive }}/VSCode-linux-x64 {{ vscode.config.path }}
+    - require:
+      - archive: vscode-package-archive-install-extract

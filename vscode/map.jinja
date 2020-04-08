@@ -22,8 +22,8 @@
        {%- if grains.os_family == 'MacOS' %}
            {%- do vscode.pkg.archive.update({ 'name': '/Applications', 'source': uri }) %}
        {%- else %}
-           {%- set dir = 'VSCode-linux-x64' %}
-           {%- do vscode.config.update({'path': 'vscode.dir.archive + '/' + dir }) %},
-           {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive + '/' + dir, 'source': url }) %}
+           {%- set dir = '%s-%s'.format(vscode.pkg.name, vscode.version) %}
+           {%- do vscode.config.update({'path': vscode.dir.archive + '/' + dir }) %}
+           {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive, 'source': url }) %}
        {%- endif %}
 {%- endif %}
