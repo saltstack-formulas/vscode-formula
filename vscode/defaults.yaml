@@ -21,11 +21,11 @@ vscode:
       - curl
     package:
       name: code  # snap
-    uri: https://go.microsoft.com/fwlink/?LinkID=620884
+    uri: https://go.microsoft.com/fwlink/?LinkID=620884   # linux tarball
     archive:
       source: 'set by map.jinja'
       source_hash: 8f38474e258c1bbd469b5311051c50466a080b9e970b506e0e0bad387d524fed
-      skip_verify: false           # true needed if permalink cannot be determined
+      skip_verify: true     # true needed because ms permalink hash keeps changing
       trim_output: true
   retry_option:
     # https://docs.saltstack.com/en/latest/ref/states/requisites.html#retrying-states
