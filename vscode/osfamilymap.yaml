@@ -26,8 +26,6 @@ MacOS:
   rootuser: {{ macos_rootuser | d('') }}
   rootgroup: {{ macos_rootgroup | d('') }}
   environ_file: /etc/defaults/vscode.sh
-  config:
-    path: ''
   pkg:
     package:
       name: visual-studio-code
