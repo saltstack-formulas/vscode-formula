@@ -24,14 +24,16 @@ vscode-package-archive-install-extract:
     - retry: {{ vscode.retry_option }}
     - user: {{ vscode.rootuser }}
     - group: {{ vscode.rootgroup }}
+
+    {%- if vscode.kernel|lower == 'linux' %}
+
   cmd.run:
     - onlyif: {{ grains.kernel|lower == 'linux' }}
     - name: mv {{ vscode.dir.archive }}/VSCode-linux-x64 {{ vscode.config.path }}
     - require:
       - archive: vscode-package-archive-install-extract
 
-    {%- if vscode.kernel|lower == 'linux' and vscode.linux.altpriority|int == 0 %}
-
+        {%- if vscode.linux.altpriority|int == 0 %}
 vscode-archive-install-file-symlink-vscode:
   file.symlink:
     - onlyif: {{ vscode.kernel|lower == 'linux' }}
@@ -40,4 +42,6 @@ vscode-archive-install-file-symlink-vscode:
     - force: True
     - require:
       - archive: vscode-package-archive-install-extract
+        {%- endif %}
+
     {%- endif %}

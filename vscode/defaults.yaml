@@ -8,7 +8,8 @@ vscode:
   environ_file: /etc/default/vscode.sh
   environ:
     - dummy=dummy
-  config: {}
+  config:
+    path: null
   dir:
     tmp: /tmp/vscode
     archive: /usr/local
