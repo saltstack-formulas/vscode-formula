@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import vscode with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
@@ -20,8 +19,8 @@ vscode-config-file-managed-environ_file:
                  )
               }}
     - mode: 640
-    - user: {{ vscode.rootuser }}
-    - group: {{ vscode.rootgroup }}
+    - user: {{ vscode.identity.rootuser }}
+    - group: {{ vscode.identity.rootgroup }}
     - makedirs: True
     - template: jinja
     - context:

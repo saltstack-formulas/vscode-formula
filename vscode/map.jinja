@@ -20,13 +20,13 @@
 %}
 {%- set vscode = salt['grains.filter_by']( {'defaults': defaults}, default='defaults', merge=_config) %}
 
-{%- if vscode.pkg.use_upstream_archive %}
-       {%- set url = '%s'|format(vscode.pkg.uri) %}
-       {%- if grains.os_family == 'MacOS' %}
-           {%- do vscode.pkg.archive.update({ 'name': '/Applications', 'source': url }) %}
-       {%- else %}
-           {%- set dir = vscode.pkg.name ~ '-' ~ vscode.version %}
-           {%- do vscode.config.update({'path': vscode.dir.archive ~ '/' ~ dir }) %}
-           {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive, 'source': url }) %}
-       {%- endif %}
+{%- if vscode.pkg.use_upstream == 'archive' %}
+    {%- set url = '%s'|format(vscode.pkg.uri_a) %}
+    {%- if grains.os_family == 'MacOS' %}
+        {%- do vscode.pkg.archive.update({ 'name': '/Applications', 'source': url }) %}
+    {%- else %}
+        {%- set dir = vscode.pkg.archive.path ~ '-' ~ vscode.pkg.version %}
+        {%- do vscode.config.update({'name': vscode.dir.archive ~ vscode.div ~ dir }) %}
+        {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive, 'source': url }) %}
+    {%- endif %}
 {%- endif %}
