@@ -3,5 +3,9 @@
 # Your changes may be overwritten.
 ########################################################################
 
-export PATH=${PATH}:{{ path }}
-{{ environ|yaml(False) }}
+{%- if environ %}
+    {%- for line in environ|unique %}
+{{ line }}
+    {%- endfor %}
+{%- endif %}
+

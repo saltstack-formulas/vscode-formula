@@ -11,27 +11,36 @@
 # osfamilymap: {}
 ---
 {%- if grains.os == 'MacOS' %}
-    {%- set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
-    {%- set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+    {%- set rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+    {%- set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%- elif grains.os == 'Windows' %}
+    {%- set rootuser = salt['cmd.run']("id -un") %}
 {%- endif %}
 
 Windows:
+  identity:
+    rootuser: {{ rootuser | d('') }}
+  environ_file: null
+  div: '\'
   pkg:
-    format: zip
-    uri: https://go.microsoft.com/fwlink/?LinkID=850641
+    name: Vscode-win32-x64
+    deps: []
+    uri_a: https://go.microsoft.com/fwlink/?LinkID=850641
     archive:
-      source_hash: 2ad9da475f986abebe2189b9ddea1753d0fdf292ecc6f5b9b6c408312b09348e
+      enforce_toplevel: false
+    format: zip
+  dir:
+    tmp: C:\temp\vscode
+    archive: C:\vscode
 
 MacOS:
-  rootuser: {{ macos_rootuser | d('') }}
-  rootgroup: {{ macos_rootgroup | d('') }}
+  identity:
+    rootuser: {{ rootuser | d('') }}
+    rootgroup: {{ rootgroup | d('') }}
   environ_file: /etc/defaults/vscode.sh
   pkg:
-    package:
-      name: visual-studio-code
+    name: visual-studio-code
     deps:
       - unzip
     format: zip
-    uri: https://go.microsoft.com/fwlink/?LinkID=620882
-    archive:
-      source_hash: d6adeca1476e95f2742ac3f2f7f3993e935ecfd2933a00be874d673ced0514b7
+    uri_a: https://go.microsoft.com/fwlink/?LinkID=620882
