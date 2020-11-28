@@ -7,6 +7,9 @@
 vscode-package-archive-clean-file-absent:
   file.absent:
     - names:
-      - {{ vscode.pkg.archive.name }}
-      - {{ vscode.config.path }}
+      - {{ vscode.dir.archive }}
       - {{ vscode.dir.tmp }}
+      {%- if vscode.config.path != None %}
+      - {{ vscode.config.path }}
+      {%- endif %}
+
