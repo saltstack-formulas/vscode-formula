@@ -24,9 +24,10 @@ Windows:
   div: '\'
   pkg:
     name: Vscode-win32-x64
+    deps: []
     uri_a: https://go.microsoft.com/fwlink/?LinkID=850641
     archive:
-      source_hash: 2ad9da475f986abebe2189b9ddea1753d0fdf292ecc6f5b9b6c408312b09348e
+      enforce_toplevel: false
     format: zip
   dir:
     tmp: C:\temp\vscode
@@ -43,5 +44,3 @@ MacOS:
       - unzip
     format: zip
     uri_a: https://go.microsoft.com/fwlink/?LinkID=620882
-    archive:
-      source_hash: d6adeca1476e95f2742ac3f2f7f3993e935ecfd2933a00be874d673ced0514b7

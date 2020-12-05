@@ -3,7 +3,9 @@
 
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import vscode with context %}
-{%- set sls_package_clean = tplroot ~ '.archive.clean' %}
+
+    {%- if vscode.environ_file %}
+        {%- set sls_package_clean = tplroot ~ '.archive.clean' %}
 
 include:
   - {{ sls_package_clean }}
@@ -13,3 +15,5 @@ vscode-config-clean-file-absent:
     - name: {{ vscode.environ_file }}
     - require:
       - sls: {{ sls_package_clean }}
+
+    {%- endif %}

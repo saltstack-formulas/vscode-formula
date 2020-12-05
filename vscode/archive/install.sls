@@ -21,9 +21,9 @@ vscode-package-archive-install-extract:
     - makedirs: True
     - require_in:
       - archive: vscode-package-archive-install-extract
-        {%- if grains.os|lower == 'windows' and vscode.pkg.archive.name != '/Applications' %}
+        {%- if grains.os|lower != 'windows' and vscode.pkg.archive.name != '/Applications' %}
     - user: {{ vscode.identity.rootuser }}
-    - group: {{ vscode.rootgroup }}
+    - group: {{ vscode.identity.rootgroup }}
     - mode: 755
         {%- endif %}
   archive.extracted:

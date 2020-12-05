@@ -18,9 +18,6 @@ vscode-config-file-managed-environ_file:
                               lookup='vscode-config-file-managed-environ_file'
                  )
               }}
-    - mode: 640
-    - user: {{ vscode.identity.rootuser }}
-    - group: {{ vscode.identity.rootgroup }}
     - makedirs: True
     - template: jinja
     - context:
@@ -28,5 +25,10 @@ vscode-config-file-managed-environ_file:
         environ: {{ vscode.environ|json }}
     - require:
       - sls: {{ sls_package_install }}
+        {%- if grains.os != 'Windows' %}
+    - user: {{ vscode.identity.rootuser }}
+    - group: {{ vscode.identity.rootgroup }}
+    - mode: 755
+        {%- endif %}
 
     {%- endif %}
