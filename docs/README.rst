@@ -14,7 +14,7 @@ vscode-formula
    :scale: 100%
    :target: https://github.com/semantic-release/semantic-release
 
-Formula to install Visual Studio Code on GNU/Linux and MacOS.
+Formula to install Visual Studio Code on GNU/Linux, MacOS, and Windows.
 
 .. contents:: **Table of Contents**
    :depth: 1

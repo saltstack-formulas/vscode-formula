@@ -5,7 +5,7 @@
 {%- from tplroot ~ "/map.jinja" import vscode with context %}
 {%- from tplroot ~ "/files/macros.jinja" import format_kwargs with context %}
 
-        {%- if vscode.pkg.deps %}
+    {%- if vscode.pkg.deps %}
 
 vscode-package-archive-install-deps:
   pkg.installed:
@@ -13,7 +13,7 @@ vscode-package-archive-install-deps:
     - require_in:
       - file: vscode-package-archive-install-extract
 
-        {%- endif %}
+    {%- endif %}
 
 vscode-package-archive-install-extract:
   file.directory:
@@ -46,7 +46,6 @@ vscode-package-archive-install-extract:
 
 vscode-archive-install-file-symlink-vscode:
   file.symlink:
-    - onlyif: {{ vscode.kernel|lower == 'linux' }}
     - name: {{ vscode.dir.archive }}/bin/code
     - target: {{ vscode.config.path }}/bin/code
     - force: True
@@ -54,4 +53,17 @@ vscode-archive-install-file-symlink-vscode:
       - archive: vscode-package-archive-install-extract
 
         {%- endif %}
+    {%- elif grains.kernel|lower == 'windows' %}
+
+vscode-archive-install-windows-shortcut-vscode:
+  file.shortcut:
+    - name: C:\Users\{{ vscode.identity.rootuser }}\Desktop\Visual Studio Code.lnk
+    - target: {{ vscode.pkg.archive.name }}/Code
+    - working_dir: {{ vscode.config.path }}/bin
+    - makedirs: True
+    - force: True
+    - user: {{ vscode.identity.rootuser }}
+    - require:
+      - archive: vscode-package-archive-install-extract
+
     {%- endif %}
