@@ -61,12 +61,12 @@ This state will install VSCode package on MacOS (brew) and GNU/Linux (snap).
 ``vscode.archive``
 ^^^^^^^^^^^^^^^^^^
 
-This state will install VSCode on GNU/Linux from archive.
+This state will install VSCode on GNU/Linux and Windows from archive.
 
 ``vscode.archive.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove VSCode archive.
+This state will remove VSCode archive from GNU/Linux and Windows.
 
 ``vscode.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^
