@@ -6,5 +6,9 @@
 {%- set p = vscode.pkg %}
 
 include:
+        {%- if grains.os|lower == 'windows' %}
+  - .installer
+        {%- else %}
   - .archive
+        {%- endif %}
   - .config

@@ -80,6 +80,17 @@ This state will remove VSCode package from MacOS and GNU/Linux.
 
 this state will undo everything performed in the ``vscode`` meta-state in reverse order.
 
+``vscode.installer``
+^^^^^^^^^^^^^^^^^^^
+
+This state runs the interactive Visual Studio Installer on Windows (BuildTools, etc).
+
+``vscode.installer.clean``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This state cleans up Visual Studio Installer download on Windows.
+
+
 
 Testing
 -------
