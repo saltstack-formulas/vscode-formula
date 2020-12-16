@@ -4,7 +4,7 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import vscode with context %}
 
-vscode-package-archive-clean-file-absent:
+vscode-archive-clean-file-absent:
   file.absent:
     - names:
       - {{ vscode.dir.archive }}

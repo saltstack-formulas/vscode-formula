@@ -27,3 +27,8 @@
         {%- do vscode.pkg.archive.update({ 'name': vscode.dir.archive, 'source': url }) %}
     {%- endif %}
 {%- endif %}
+
+{%- if grains.os|lower == 'windows' and vscode.pkg.installer %}
+    {%- set url = salt['cmd.run']('curl -L -s "{0}" | grep downloadUrl'.format(vscode.pkg.uri_b), python_shell=True).split(' ')[1] %}
+    {%- do vscode.pkg.installer.update({ 'source': url }) %}
+{%- endif %}
