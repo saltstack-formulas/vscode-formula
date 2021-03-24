@@ -25,7 +25,6 @@ vscode:
     archive:
       skip_verify: true
     format: tar
-
   retry_option:
     # https://docs.saltstack.com/en/latest/ref/states/requisites.html#retrying-states
     attempts: 3

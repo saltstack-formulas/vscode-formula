@@ -6,5 +6,4 @@
 
 include:
   - .archive.clean
-  - .installer.clean
   - .config.clean
