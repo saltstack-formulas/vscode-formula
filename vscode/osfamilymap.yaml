@@ -29,9 +29,6 @@ Windows:
     archive:
       enforce_toplevel: false
     format: zip
-    uri_b: https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools
-    installer:
-      skip_verify: true
   dir:
     tmp: C:\temp\vscode
     archive: C:\vscode

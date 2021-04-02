@@ -57,7 +57,7 @@ vscode-archive-install-file-symlink-vscode:
 
 vscode-archive-install-windows-shortcut-vscode:
   file.shortcut:
-    - name: C:\Users\{{ vscode.identity.rootuser }}\Desktop\Visual Studio Code.lnk
+    - name: C:\Users\{{ vscode.identity.rootuser }}\Desktop\VS Code.lnk
     - target: {{ vscode.pkg.archive.name }}/Code
     - working_dir: {{ vscode.config.path }}/bin
     - makedirs: True
